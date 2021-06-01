@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'home.apps.HomeConfig',
+    'admin_reorder'
 ]
 
 MIDDLEWARE = [
@@ -48,7 +49,21 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'admin_reorder.middleware.ModelAdminReorder'
 ]
+
+ADMIN_REORDER = (
+    'sites',
+    # Reorder app models
+    {'app': 'auth', 'models': ('auth.User', 'auth.Group')},
+    # Exclude models
+    {'app': 'home', 'models': ({
+                                   'model' : 'home.AdminFileLog',
+                                   'label' : 'Upload new batch and replace existing batch'
+                               },)
+     }
+
+)
 
 ROOT_URLCONF = 'app.urls'
 

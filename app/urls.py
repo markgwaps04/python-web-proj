@@ -26,3 +26,4 @@ urlpatterns = [
 admin.site.site_header = "Shine Admin Portal"
 admin.site.site_title = "Shine Admin Portal"
 admin.site.site_url = "/home"
+admin.site.enable_nav_sidebar = False

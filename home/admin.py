@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.forms import ModelForm
 from .models import AdminFileLog
 from django.urls import reverse
 from django.template.response import TemplateResponse
@@ -8,17 +9,17 @@ from django.template.response import TemplateResponse
 
 class AdminFileLogAdmin(admin.ModelAdmin):
 
-    verbose_name = "Upload and Replace new batch of data"
-    verbose_name_plural =  "Upload and Replace new batch of data"
+    class Media:
+        js = ['file_upload.js']
+
     def has_add_permission(self, request, obj=None):
         return False
 
     def changelist_view(self, request, extra_context=None):
 
-        context = dict(
-           # Include common variables for rendering the admin template.
-           self.admin_site.each_context(request)
-        )
+        context = self.admin_site.each_context(request)
+        print(context);
+        context["title"] = "Upload new file"
         return TemplateResponse(request, 'file_upload.html', context)
         pass
 
