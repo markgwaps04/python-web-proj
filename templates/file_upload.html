@@ -1,0 +1,26 @@
+{% extends 'admin/base.html' %}
+{% load i18n admin_urls %}
+
+{% block title %} {{ title }} | {{ site_title }}{% endblock %}
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'admin:index' %}">{{site_title}}</a></h1>
+{% endblock %}
+
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+    <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a> &nbsp;
+    <a href="{{ adminfilelog.get_absolute_url }}" ><b>Upload new file</b></a>
+</div>
+{% endblock %}
+
+
+
+{% block content %}
+
+<h3>Drop file to start upload</h3>
+
+
+{% endblock %}
+
+
