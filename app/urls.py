@@ -15,11 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
-print(admin.site.urls)
-
+from home.views import UploadView
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('upload/', UploadView.as_view()),
 ]
 
 

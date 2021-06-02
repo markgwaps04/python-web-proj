@@ -14,7 +14,7 @@
 
 {% block content %}
 
-<form method="post" action="https://css-tricks.com/examples/DragAndDropFileUploading//?" enctype="multipart/form-data"
+<form method="post" enctype="multipart/form-data"
       novalidate="" class="box has-advanced-upload" draggable="true">
     <div class="box__input">
         <svg class="box__icon" xmlns="http://www.w3.org/2000/svg" width="50" height="43" viewBox="0 0 50 43">
@@ -32,6 +32,8 @@
 {% block scripts %}
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script src="{% static 'jquery.cookie.min.js' %}"></script>
+<script src="{% static 'swal.js' %}"></script>
 <script src="{% static 'file_upload.js' %}"></script>
 
 {% endblock %}
