@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.http import JsonResponse
 from app.misc import excel_algo
+from .models import budgetExpenses
 import json
 
 
@@ -29,12 +30,28 @@ class GenerateView(View):
 class SaveView(View):
 
     def post(self, request):
-        if 'generated_data' in request.session:
+
+        if not 'generated_data' in request.session:
 
             return HttpResponse(json.dumps({
                 "status" : "Invalid Action",
                 "status_code" : 309
             }), content_type='application/json', status=404)
+
+            pass
+
+        print(request.session['generated_data'])
+        for key,per in request.session['generated_data'].items() :
+
+            of_budget_expenses = budgetExpenses.objects.create(name=key)
+
+            for per_item in per["items"]:
+
+                print(per_item)
+
+                pass
+
+
 
             pass
 
