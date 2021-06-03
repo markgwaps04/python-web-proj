@@ -1,0 +1,92 @@
+{% load dict_key %}
+
+<div class="bd-example mt-2">
+    <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+            <th scope="col"><b>Name</b></th>
+            <th scope="col"><b>Weekly</b></th>
+            <th scope="col"><b>Bi-Weekly</b></th>
+            <th scope="col"><b>Monthly</b></th>
+            <th scope="col"><b>Yearly</b></th>
+            <th scope="col"><b>Action</b></th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for key_first,per_first in data.items %}
+
+        <tr>
+            <td colspan="6" class="table-primary"><h5 class="text-dark">{{key_first|title}}</h5></td>
+        </tr>
+
+        {% for per_second in per_first.items %}
+
+        {% for per_third in per_second.keys %}
+
+        {% if not per_second|is_subkey:per_third %}
+
+        <tr>
+            <td scope="row" class="table-success">{{per_third}}</td>
+            <td>{{per_second|get_weekly:per_third}}</td>
+            <td>{{per_second|get_biweekly:per_third}}</td>
+            <td>{{per_second|get_monthly:per_third}}</td>
+            <td>{{per_second|get_yearly:per_third}}</td>
+            <td id="{{per_second|get_code:per_third}}">
+                <h6><span class="badge bg-secondary">PENDING</span></h6>
+            </td>
+        </tr>
+
+        {% else %}
+
+        <!--   sub query     -->
+
+        <tr>
+            <td colspan="6" class="table-primary">
+                <li>
+                    <span class="text-secondary fs-6 fw-normal text">
+                            {{per_third|title}}
+                    </span>
+                </li>
+            </td>
+        </tr>
+
+        {% for per_sub_items in per_second|get_items:per_third %}
+
+        {% for per_sub_on_item in per_sub_items.keys %}
+
+        <tr>
+            <td scope="row" class="table-success">{{per_sub_on_item}}</td>
+            <td>{{per_sub_items|get_weekly:per_sub_on_item}}</td>
+            <td>{{per_sub_items|get_biweekly:per_sub_on_item}}</td>
+            <td>{{per_sub_items|get_monthly:per_sub_on_item}}</td>
+            <td>{{per_sub_items|get_yearly:per_sub_on_item}}</td>
+            <td>
+                <h6><span class="badge bg-secondary">PENDING</span></h6>
+            </td>
+        </tr>
+
+        {% endfor %}
+
+
+        {% endfor %}
+
+
+        {% endif %}
+
+
+        {% endfor %}
+
+        {% endfor %}
+
+
+        {% endfor %}
+
+
+        </tbody>
+    </table>
+</div>
+
+
+
+
